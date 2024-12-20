@@ -26,7 +26,9 @@ $rooms = App\Models\Room::all();
                                 <td>{{ $room->price }}</td>
                                 <td>{{ $room->short_description }}</td>
                                 <td>{{ $room->long_description }}</td>
-                                <td>edit</td>
+                                <td>
+                                    edit
+                                </td>
                             @endforeach
                         </tr>
                     </table>
