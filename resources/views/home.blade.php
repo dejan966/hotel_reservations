@@ -27,7 +27,11 @@ $rooms = App\Models\Room::all();
                                 <td>{{ $room->short_description }}</td>
                                 <td>{{ $room->long_description }}</td>
                                 <td>
-                                    edit
+                                    <button class="btn btn-primary">
+                                        <a href="{{ route('room.edit', ['id' => $room->id]) }}">
+                                            Edit
+                                        </a>
+                                    </button>
                                 </td>
                             @endforeach
                         </tr>
