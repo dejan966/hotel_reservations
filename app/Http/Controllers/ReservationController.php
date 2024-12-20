@@ -6,6 +6,8 @@ use App\Models\Reservation;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use App\Notifications\ReservationFeedback;
+use Carbon\Carbon;
 use Exception;
 
 class ReservationController extends Controller
@@ -40,6 +42,13 @@ class ReservationController extends Controller
         } catch (Exception $ex) {
             Log::error('Trouble making reservation: '.$ex->getMessage());
             return back()->with(['status' => 'Trouble making reservation']);
+        }
+        
+        try {
+            $reservation->notify(new ReservationFeedback($reservation->email, $reservation));
+        } catch (Exception $ex) {
+            Log::error('Trouble sending confirmation email: '.$ex->getMessage());
+            return back()->with(['status' => 'Trouble sending confirmation email.']);
         }
 
         return back()->with(['status' => 'Successfully made reservation for room '.$reservation->room->name.'.']);

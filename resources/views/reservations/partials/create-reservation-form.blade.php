@@ -1,6 +1,6 @@
 <section>
     <header>
-        <h2 class="text-2xl font-medium text-gray-900 text-center">
+        <h2 class="text-2xl font-medium text-gray-900 text-center mb-4">
             {{ __('Create Reservation') }}
         </h2>
     </header>
