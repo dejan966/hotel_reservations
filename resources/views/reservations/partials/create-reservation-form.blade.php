@@ -40,7 +40,7 @@
 
         <!-- Room -->
         <div class="row mb-3">
-            <label for="room" class="col-md-4 col-form-label text-md-end">{{ __('First and last name') }}</label>
+            <label for="room" class="col-md-4 col-form-label text-md-end">{{ __('Room') }}</label>
             
             <div class="col-md-6">
                 <x-input-select-room class="form-control" name="room_id" />

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
+use App\Mail\ReservationConfirmation;
+use App\Mail\ReservationCopy;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use App\Notifications\ReservationFeedback;
 use Carbon\Carbon;
 use Exception;
 
@@ -45,7 +47,12 @@ class ReservationController extends Controller
         }
         
         try {
-            $reservation->notify(new ReservationFeedback($reservation->email, $reservation));
+            $date = Carbon::parse($reservation->arrival_date);
+            $diff = $date->diffInDays($reservation->departure_date);
+            
+            $fullPrice = $reservation->room->price * $diff;
+            Mail::to($reservation->email)->send(new ReservationConfirmation($reservation, $fullPrice));
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ReservationCopy($reservation, $fullPrice));
         } catch (Exception $ex) {
             Log::error('Trouble sending confirmation email: '.$ex->getMessage());
             return back()->with(['status' => 'Trouble sending confirmation email.']);
