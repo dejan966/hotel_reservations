@@ -12,7 +12,7 @@ class Reservation extends Model
 
     protected $fillable = [
         'arrival_date',
-        'departue_date',
+        'departure_date',
         'room_id',
         'name_surname',
         'email',

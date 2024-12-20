@@ -5,56 +5,120 @@
         </h2>
     </header>
 
-   <!-- Session Status -->
-   <x-auth-session-status class="mb-4" :status="session('status')" />
-
     <form method="POST" action="{{ route('reservations.create') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
 
         <!-- Arrival date -->
-        <div>
-            <x-input-label for="arrival_date" :value="__('Arrival Date')" />
-            <input id="arrival_date" class="block mt-1 w-full" type="datetime-local" name="arrival_date" required autofocus autocomplete="establishment_date" />
-            <x-input-error :messages="$errors->get('arrivalt_date')" class="mt-2" />
-        </div>
+        <div class="row mb-3">
+            <label for="arrival_date" class="col-md-4 col-form-label text-md-end">{{ __('Arrival Date') }}</label>
 
+            <div class="col-md-6">
+                <input id="arrival_date" type="datetime-local" class="form-control @error('arrival_date') is-invalid @enderror" name="arrival_date" autocomplete="email" autofocus>
+
+                @error('arrival_date')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        
         <!-- Departure date -->
-        <div>
-            <x-input-label for="departure_date" :value="__('Departure Date')" />
-            <input id="departure_date" class="block mt-1 w-full" type="date" name="departure_date" required autofocus autocomplete="departure_date" />
-            <x-input-error :messages="$errors->get('departure_date')" class="mt-2" />
+        <div class="row mb-3">
+            <label for="departure_date" class="col-md-4 col-form-label text-md-end">{{ __('Departure Date') }}</label>
+
+            <div class="col-md-6">
+                <input id="departure_date" type="datetime-local" class="form-control @error('departure_date') is-invalid @enderror" name="departure_date" autocomplete="email" autofocus>
+
+                @error('departure_date')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
         </div>
 
+        <!-- Room -->
+        <div class="row mb-3">
+            <label for="room" class="col-md-4 col-form-label text-md-end">{{ __('First and last name') }}</label>
+            
+            <div class="col-md-6">
+                <x-input-select-room class="form-control" name="room_id" />
+            </div>
+        </div>
+        
         <!-- First name, last name -->
-        <div>
-            <x-input-label for="name_surname" :value="__('First Name and Last Name')" />
-            <x-text-input id="name_surname" class="block mt-1 w-full" type="text" name="name_surname" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name_surname')" class="mt-2" />
+        <div class="row mb-3">
+            <label for="name_surname" class="col-md-4 col-form-label text-md-end">{{ __('First and last name') }}</label>
+
+            <div class="col-md-6">
+                <input id="name_surname" type="text" class="form-control @error('name_surname') is-invalid @enderror" name="name_surname" autocomplete="email" autofocus>
+
+                @error('name_surname')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
         </div>
 
         <!-- Email -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="email" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="row mb-3">
+            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
+
+            <div class="col-md-6">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" autocomplete="email" autofocus>
+
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
         </div>
         
         <!-- Phone -->
-        <div>
-            <x-input-label for="phone" :value="__('Phone')" />
-            <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" required autofocus autocomplete="phone" />
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        <div class="row mb-3">
+            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone') }}</label>
+
+            <div class="col-md-6">
+                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" autocomplete="phone" autofocus>
+
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
         </div>
 
         <!-- Notes -->
-        <div>
-            <x-input-label for="notes" :value="__('Notes')" />
-            <textarea id="notes" class="block mt-1 w-full" name="notes" autofocus autocomplete="notes"> </textarea>
-            <x-input-error :messages="$errors->get('notes')" class="mt-2" />
+        <div class="row mb-3">
+            <label for="notes" class="col-md-4 col-form-label text-md-end">{{ __('Notes') }}</label>
+            
+            <div class="col-md-6">
+                <textarea id="notes"class="form-control @error('notes') is-invalid @enderror" name="notes" autofocus autocomplete="notes"> </textarea>
+                @error('notes')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
         </div>
 
-        <x-primary-button class="mt-3 w-full justify-center">
-            {{ __('Save') }}
-        </x-primary-button>
+        <!-- Session Status -->
+        <div class="row mb-0">
+            <div class="text-success">
+                {{ session('status') }}
+            </div>
+        </div>
+
+        <div class="row mb-0">
+            <div class="col-md-8 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Save') }}
+                </button>
+            </div>
+        </div>
     </form>
 </section>
