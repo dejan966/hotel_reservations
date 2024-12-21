@@ -1,3 +1,11 @@
+<head>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("reservation-form").submit();
+        }
+    </script>
+</head>
 <section>
     <header>
         <h2 class="text-2xl font-medium text-gray-900 text-center mb-4">
@@ -5,7 +13,7 @@
         </h2>
     </header>
 
-    <form method="POST" action="{{ route('reservations.create') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('reservations.create') }}" class="mt-6 space-y-6" id="reservation-form" enctype="multipart/form-data">
         @csrf
 
         <!-- Arrival date -->
@@ -116,7 +124,7 @@
 
         <div class="row mb-0">
             <div class="col-md-8 offset-md-4">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="g-recaptcha btn btn-primary" data-sitekey="{{config('services.recaptcha.key')}}" data-callback="onSubmit" data-action="reservation">
                     {{ __('Save') }}
                 </button>
             </div>

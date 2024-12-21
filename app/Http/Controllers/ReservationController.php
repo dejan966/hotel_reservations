@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
+use App\Rules\ReCaptchaV3;
 use Exception;
 
 class ReservationController extends Controller
@@ -37,6 +38,7 @@ class ReservationController extends Controller
             'departure_date' => 'required|date|after:arrival_date',
             'room_id' => 'required|exists:rooms,id',
             'notes' => 'nullable|string',
+           'g-recaptcha-response' => ['required', new ReCaptchaV3('reservation')]
         ]);
 
         try {
