@@ -108,7 +108,8 @@
 
         <!-- Session Status -->
         <div class="row mb-0">
-            <div class="text-success">
+            <div class="col-md-4 col-form-label text-md-end"></div>
+            <div class="text-success col-md-6 mb-3">
                 {{ session('status') }}
             </div>
         </div>

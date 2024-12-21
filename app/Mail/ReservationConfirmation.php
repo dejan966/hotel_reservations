@@ -40,8 +40,8 @@ class ReservationConfirmation extends Mailable
             with: [
                 'full_price' => $this->fullPrice,
                 'price' => $this->reservation->room->price,
-                'arrival_date' => $this->reservation->arrival_date,
-                'departure_date' => $this->reservation->departure_date,
+                'arrival_date' => \Carbon\Carbon::parse($this->reservation->arrival_date)->format('Y-m-d'),
+                'departure_date' => \Carbon\Carbon::parse($this->reservation->departure_date)->format('Y-m-d'),
                 'name' => $this->reservation->room->name,
             ],
         );

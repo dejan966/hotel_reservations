@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Reservation;
 
-class ReservationConfirmation extends Mailable
+class ReservationCopy extends Mailable
 {
     use Queueable, SerializesModels;
     /**
@@ -38,10 +38,11 @@ class ReservationConfirmation extends Mailable
         return new Content(
             markdown: 'emails.reservation-copy',
             with: [
+                'email' => $this->reservation->email,
                 'full_price' => $this->fullPrice,
                 'price' => $this->reservation->room->price,
-                'arrival_date' => $this->reservation->arrival_date,
-                'departure_date' => $this->reservation->departure_date,
+                'arrival_date' => \Carbon\Carbon::parse($this->reservation->arrival_date)->format('Y-m-d'),
+                'departure_date' => \Carbon\Carbon::parse($this->reservation->departure_date)->format('Y-m-d'),
                 'name' => $this->reservation->room->name,
             ],
         );
