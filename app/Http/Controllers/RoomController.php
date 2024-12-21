@@ -17,6 +17,11 @@ class RoomController extends Controller
     public function openEdit(Request $request)
     {
         $room = Room::where('id', '=', $request->route('id'))->first();
+        
+        if(!$room){
+            return view('errors.404');
+        }
+
         return view('rooms.edit',  ['room' => $room]);
     }
 

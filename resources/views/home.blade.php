@@ -28,7 +28,7 @@ $rooms = App\Models\Room::all();
                                 <td>{{ $room->long_description }}</td>
                                 <td>
                                     <button class="btn btn-primary">
-                                        <a href="{{ route('room.edit', ['id' => $room->id]) }}">
+                                        <a href="{{ route('room.edit', ['id' => $room->id]) }}" class="text-white text-decoration-none">
                                             Edit
                                         </a>
                                     </button>
