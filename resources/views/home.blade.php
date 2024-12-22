@@ -19,8 +19,8 @@ $rooms = App\Models\Room::all();
                             <th>Long description</th>
                             <th>Edit</th>
                         </tr>
-                        <tr>
-                            @foreach ($rooms as $room)
+                        @foreach ($rooms as $room)
+                            <tr>
                                 <td>{{ $room->id }}</td>
                                 <td>{{ $room->name }}</td>
                                 <td>{{ $room->price }}</td>
@@ -33,8 +33,9 @@ $rooms = App\Models\Room::all();
                                         </a>
                                     </button>
                                 </td>
-                            @endforeach
-                        </tr>
+                            </tr>
+                        @endforeach
+
                     </table>
                 </div>
             </div>
